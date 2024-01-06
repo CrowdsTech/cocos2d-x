@@ -1175,7 +1175,7 @@ void ParticleDemo::update(float dt)
     {
         auto atlas = (LabelAtlas*)getChildByTag(kTagParticleCount);
         char str[5] = {0};
-        sprintf(str, "%04d", _emitter->getParticleCount());
+        snprintf(str, sizeof(str), "%04d", _emitter->getParticleCount());
         atlas->setString(str);
     }
 }
@@ -1543,7 +1543,7 @@ void MultipleParticleSystems::update(float dt)
     }
 
     char str[100] = {0};
-    sprintf(str, "%4d", count);
+    snprintf(str, sizeof(str), "%4d", count);
     atlas->setString(str);
 }
 
@@ -1591,7 +1591,7 @@ void MultipleParticleSystemsBatched::update(float dt)
     }
 
     char str[50] = {0};
-    sprintf(str, "%4d", count);
+    snprintf(str, sizeof(str), "%4d", count);
     atlas->setString(str);
 }
 
@@ -1679,7 +1679,7 @@ void AddAndDeleteParticleSystems::update(float dt)
     }
 
     char str[100] = {0};
-    sprintf(str, "%4d", count);
+    snprintf(str, sizeof(str), "%4d", count);
     atlas->setString(str);
 }
 
@@ -1813,7 +1813,7 @@ void ReorderParticleSystems::update(float dt)
         }
     }
     char str[100] = {0};
-    sprintf(str, "%4d", count);
+    snprintf(str, sizeof(str), "%4d", count);
     atlas->setString(str);
 }
 

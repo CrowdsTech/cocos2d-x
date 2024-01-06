@@ -1514,7 +1514,7 @@ void TextureAsync::loadImages(float dt)
     for( int i=0;i < 8;i++) {
         for( int j=0;j < 8; j++) {
             char szSpriteName[100] = {0};
-            sprintf(szSpriteName, "Images/sprites_test/sprite-%d-%d.png", i, j);
+            snprintf(szSpriteName, sizeof(szSpriteName), "Images/sprites_test/sprite-%d-%d.png", i, j);
             textureCache->addImageAsync(szSpriteName, CC_CALLBACK_1(TextureAsync::imageLoaded, this));
         }
     }

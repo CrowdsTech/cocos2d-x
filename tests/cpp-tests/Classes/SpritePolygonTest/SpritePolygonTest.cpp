@@ -771,7 +771,7 @@ void SpritePolygonTestFrameAnim::initSprites()
     Sprite *sprite;
     for(int i=0;i<10;i++)
     {
-        sprintf(str, "grossini_dance_%02d.png", i+1);
+        snprintf(str, sizeof(str), "grossini_dance_%02d.png", i+1);
         sprite = Sprite::createWithSpriteFrameName(str);
 
         sprite->setPosition(Vec2(screen.width/6*(i%5+1), screen.height*2/3 - screen.height*(i/5)/3));
@@ -797,7 +797,7 @@ void SpritePolygonTestFrameAnim::initSprites()
     Vector<SpriteFrame*> animFrames(5);
     for(int i = 9; i < 14; i++)
     {
-        sprintf(str, "grossini_dance_%02d.png", i+1);
+        snprintf(str, sizeof(str), "grossini_dance_%02d.png", i+1);
         animFrames.pushBack(cache->getSpriteFrameByName(str));
     }
     auto animation = Animation::createWithSpriteFrames(animFrames, 0.3f);

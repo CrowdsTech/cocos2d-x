@@ -239,7 +239,7 @@ void NodeChildrenMainScene::updateQuantityLabel()
     {
         auto infoLabel = static_cast<Label*>( getChildByTag(kTagInfoLayer) );
         char str[20] = {0};
-        sprintf(str, "%u nodes", quantityOfNodes);
+        snprintf(str, sizeof(str), "%u nodes", quantityOfNodes);
         infoLabel->setString(str);
 
         lastRenderedCount = quantityOfNodes;

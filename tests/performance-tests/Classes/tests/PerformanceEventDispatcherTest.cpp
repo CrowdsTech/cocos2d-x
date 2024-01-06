@@ -311,7 +311,7 @@ void PerformanceEventDispatcherScene::updateQuantityLabel()
     {
         auto infoLabel = static_cast<Label*>( getChildByTag(kTagInfoLayer) );
         char str[20] = {0};
-        sprintf(str, "%u listeners", quantityOfNodes);
+        snprintf(str, sizeof(str), "%u listeners", quantityOfNodes);
         infoLabel->setString(str);
     }
 }

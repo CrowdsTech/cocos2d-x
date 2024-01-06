@@ -1268,7 +1268,7 @@ void NodeNameTest::test(float dt)
     char name[20];
     for (int i = 0; i < 10; ++i)
     {
-        sprintf(name, "node%d", i);
+        snprintf(name, sizeof(name), "node%d", i);
         auto node = Node::create();
         node->setName(name);
         parent->addChild(node);
@@ -1276,7 +1276,7 @@ void NodeNameTest::test(float dt)
     
     for (int i = 0; i < 10; ++i)
     {
-        sprintf(name, "node%d", i);
+        snprintf(name, sizeof(name), "node%d", i);
         auto node = parent->getChildByName(name);
         log("find child: %s", node->getName().c_str());
     }
@@ -1288,7 +1288,7 @@ void NodeNameTest::test(float dt)
     for (int i = 0; i < 100; ++i)
     {
         auto node = Node::create();
-        sprintf(name, "node%d", i);
+        snprintf(name, sizeof(name), "node%d", i);
         node->setName(name);
         parent->addChild(node);
     }
@@ -1314,7 +1314,7 @@ void NodeNameTest::test(float dt)
     for (int i = 0; i < 10; ++i)
     {
         auto node = Node::create();
-        sprintf(name, "node%d", i);
+        snprintf(name, sizeof(name), "node%d", i);
         node->setName(name);
         parent->addChild(node);
         
@@ -1345,7 +1345,7 @@ void NodeNameTest::test(float dt)
     for (int i = 0; i < 10; ++i)
     {
         auto node = Node::create();
-        sprintf(name, "node%d", i);
+        snprintf(name, sizeof(name), "node%d", i);
         node->setName(name);
         parent->addChild(node);
         
@@ -1392,14 +1392,14 @@ void NodeNameTest::test(float dt)
     for (int j = 0; j < 10; j++)
     {
         auto node = Node::create();
-        sprintf(name, "node%d", j);
+        snprintf(name, sizeof(name), "node%d", j);
         node->setName(name);
         parent->addChild(node);
         
         for (int k = 0; k < 10; ++k)
         {
             auto child = Node::create();
-            sprintf(name, "node%d", k);
+            snprintf(name, sizeof(name), "node%d", k);
             child->setName(name);
             node->addChild(child);
         }

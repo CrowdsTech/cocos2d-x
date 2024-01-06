@@ -181,13 +181,13 @@ void ForceTouchTest::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches,
     {
         float currentForce = t->getCurrentForce();
         float maxForce = t->getMaxForce();
-        sprintf(formatBuffer, _Info_Formatter, currentForce, maxForce);
+        snprintf(formatBuffer, sizeof(formatBuffer), _Info_Formatter, currentForce, maxForce);
         _infoLabel->setString(std::string(formatBuffer));
     }
 }
 
 void ForceTouchTest::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event)
 {
-    sprintf(formatBuffer, _Info_Formatter, 0.0f, 0.0f);
+    snprintf(formatBuffer, sizeof(formatBuffer), _Info_Formatter, 0.0f, 0.0f);
     _infoLabel->setString(std::string(formatBuffer));
 }

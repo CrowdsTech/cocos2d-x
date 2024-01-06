@@ -147,7 +147,7 @@ void LabelMainScene::updateNodes()
     {
         auto infoLabel = (Label *) getChildByTag(kTagInfoLayer);
         char str[16] = {0};
-        sprintf(str, "%u nodes", _quantityNodes);
+        snprintf(str, sizeof(str), "%u nodes", _quantityNodes);
         infoLabel->setString(str);
 
         _lastRenderedCount = _quantityNodes;
@@ -259,7 +259,7 @@ void LabelMainScene::updateText(float dt)
 
     _accumulativeTime += dt;
     char text[20];
-    sprintf(text,"%.2f",_accumulativeTime);
+    snprintf(text, sizeof(text),"%.2f",_accumulativeTime);
 
     auto& children = _labelContainer->getChildren();
     switch (_curTestCase)

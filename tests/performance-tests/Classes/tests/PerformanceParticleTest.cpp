@@ -136,7 +136,7 @@ void ParticleMainScene::initWithSubTest(int asubtest, int particles)
     for (int i = 1; i <= MAX_SUB_TEST_NUM; ++i)
     {
         char str[10] = {0};
-        sprintf(str, "%d ", i);
+        snprintf(str, sizeof(str), "%d ", i);
         auto itemFont = MenuItemFont::create(str, CC_CALLBACK_1(ParticleMainScene::testNCallback, this));
         itemFont->setTag(i);
         pSubMenu->addChild(itemFont, 10);
@@ -268,7 +268,7 @@ void ParticleMainScene::step(float dt)
     auto emitter = (ParticleSystem*) getChildByTag(kTagParticleSystem);
 
     char str[10] = {0};
-    sprintf(str, "%4d", emitter->getParticleCount());
+    snprintf(str, sizeof(str), "%4d", emitter->getParticleCount());
     atlas->setString(str);
     
     if (isStating)
@@ -434,7 +434,7 @@ void ParticleMainScene::updateQuantityLabel()
     {
         auto infoLabel = (Label *) getChildByTag(kTagInfoLayer);
         char str[20] = {0};
-        sprintf(str, "%u particles", quantityParticles);
+        snprintf(str, sizeof(str), "%u particles", quantityParticles);
         infoLabel->setString(str);
 
         lastRenderedCount = quantityParticles;
@@ -455,7 +455,7 @@ void ParticleMainScene::updateTitle()
 std::string ParticlePerformTest1::title() const
 {
     char str[32] = {0};
-    sprintf(str, "A (%d) size=%d", subtestNumber, particleSize);
+    snprintf(str, sizeof(str), "A (%d) size=%d", subtestNumber, particleSize);
     std::string strRet = str;
     return strRet;
 }
@@ -474,7 +474,7 @@ void ParticlePerformTest1::initWithSubTest(int subtest, int particles)
 std::string ParticlePerformTest2::title() const
 {
     char str[20] = {0};
-    sprintf(str, "B (%d) size=%d", subtestNumber, particleSize);
+    snprintf(str, sizeof(str), "B (%d) size=%d", subtestNumber, particleSize);
     std::string strRet = str;
     return strRet;
 }
@@ -493,7 +493,7 @@ void ParticlePerformTest2::initWithSubTest(int subtest, int particles)
 std::string ParticlePerformTest3::title() const
 {
     char str[20] = {0};
-    sprintf(str, "C (%d) size=%d", subtestNumber, particleSize);
+    snprintf(str, sizeof(str), "C (%d) size=%d", subtestNumber, particleSize);
     std::string strRet = str;
     return strRet;
 }
@@ -512,7 +512,7 @@ void ParticlePerformTest3::initWithSubTest(int subtest, int particles)
 std::string ParticlePerformTest4::title() const
 {
     char str[20] = {0};
-    sprintf(str, "D (%d) size=%d", subtestNumber, particleSize);
+    snprintf(str, sizeof(str), "D (%d) size=%d", subtestNumber, particleSize);
     std::string strRet = str;
     return strRet;
 }

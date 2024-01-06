@@ -155,7 +155,7 @@ void ScenarioTest::performTests()
     _spriteLabel->setPosition(Vec2(origin.x, origin.y + s.height/2 + 70));
     
     char str[32] = { 0 };
-    sprintf(str, "Particles : %d", _particleNumber);
+    snprintf(str, sizeof(str), "Particles : %d", _particleNumber);
     _particleLabel = Label::createWithTTF(str, "fonts/arial.ttf", 15);
     _particleLabel->setAnchorPoint(Vec2(0.0f, 0.5f));
     addChild(_particleLabel, 10);
@@ -194,7 +194,7 @@ void ScenarioTest::addParticles(int num)
     }
 
     char str[25] = { 0 };
-    sprintf(str, "Particles : %d", _particleNumber);
+    snprintf(str, sizeof(str), "Particles : %d", _particleNumber);
     _particleLabel->setString(str);
 }
 
@@ -212,7 +212,7 @@ void ScenarioTest::removeParticles()
     }
 
     char str[25] = { 0 };
-    sprintf(str, "Particles : %d", _particleNumber);
+    snprintf(str, sizeof(str), "Particles : %d", _particleNumber);
     _particleLabel->setString(str);
 }
 
@@ -255,7 +255,7 @@ void ScenarioTest::addNewSprites(int num)
     }
 
     char str[20] = {0};
-    sprintf(str, "Sprites : %d", (int)_spriteArray.size());
+    snprintf(str, sizeof(str), "Sprites : %d", (int)_spriteArray.size());
     _spriteLabel->setString(str);
 }
 
@@ -274,7 +274,7 @@ void ScenarioTest::removeSprites()
     }
     
     char str[20] = {0};
-    sprintf(str, "Sprites : %d", (int)_spriteArray.size());
+    snprintf(str, sizeof(str), "Sprites : %d", (int)_spriteArray.size());
     _spriteLabel->setString(str);
 }
 
@@ -313,7 +313,7 @@ void ScenarioTest::addParticleSystem(int num)
     }
 
     char str[40] = {0};
-    sprintf(str, "Particle System : %d", (int)_parsysArray.size());
+    snprintf(str, sizeof(str), "Particle System : %d", (int)_parsysArray.size());
     _parsysLabel->setString(str);
 }
 
@@ -332,7 +332,7 @@ void ScenarioTest::removeParticleSystem()
     }
     
     char str[40] = {0};
-    sprintf(str, "Particle System : %d", (int)_parsysArray.size());
+    snprintf(str, sizeof(str), "Particle System : %d", (int)_parsysArray.size());
     _parsysLabel->setString(str);
 }
 

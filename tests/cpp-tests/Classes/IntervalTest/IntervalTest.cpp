@@ -64,7 +64,7 @@ IntervalTest::IntervalTest()
         _time1 +=dt;
 
         char str[10] = {0};
-        sprintf(str, "%2.1f", _time1);
+        snprintf(str, sizeof(str), "%2.1f", _time1);
         _label1->setString( str );
     }, "step_1");
 
@@ -72,7 +72,7 @@ IntervalTest::IntervalTest()
         _time2 +=dt;
 
         char str[10] = {0};
-        sprintf(str, "%2.1f", _time2);
+        snprintf(str, sizeof(str), "%2.1f", _time2);
         _label2->setString( str );
     }, 0.5, "step_2");
 
@@ -80,7 +80,7 @@ IntervalTest::IntervalTest()
         _time3 +=dt;
 
         char str[10] = {0};
-        sprintf(str, "%2.1f", _time3);
+        snprintf(str, sizeof(str), "%2.1f", _time3);
         _label3->setString( str );
     }, 1, "step_3");
 
@@ -88,7 +88,7 @@ IntervalTest::IntervalTest()
         _time4 +=dt;
 
         char str[10] = {0};
-        sprintf(str, "%2.1f", _time4);
+        snprintf(str, sizeof(str), "%2.1f", _time4);
         _label4->setString( str );
     }, 2, "step_4");
 
@@ -137,6 +137,6 @@ void IntervalTest::update(float dt)
 {
     _time0 +=dt;
     char time[10] = {0};
-    sprintf(time, "%2.1f", _time0);
+    snprintf(time, sizeof(time), "%2.1f", _time0);
     _label0->setString(time);
 }

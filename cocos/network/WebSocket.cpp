@@ -161,7 +161,7 @@ static void printWebSocketLog(int level, const char *line)
     for (n = 0; n < LLL_COUNT; n++) {
         if (level != (1 << n))
             continue;
-        sprintf(buf, "%s: ", log_level_names[n]);
+        snprintf(buf, sizeof(buf), "%s: ", log_level_names[n]);
         break;
     }
 

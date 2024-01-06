@@ -140,7 +140,7 @@ void WebSocketDelayTest::doReceiveText()
 void WebSocketDelayTest::onOpen(network::WebSocket* ws)
 {
     char status[256] = {0};
-    sprintf(status, "Opened, url: %s, protocol: %s", ws->getUrl().c_str(), ws->getProtocol().c_str());
+    snprintf(status, sizeof(status), "Opened, url: %s, protocol: %s", ws->getUrl().c_str(), ws->getProtocol().c_str());
 
     log("Websocket (%p) was opened, url: %s, protocol: %s", ws, ws->getUrl().c_str(), ws->getProtocol().c_str());
     if (ws == _wsiSendText)
@@ -156,7 +156,7 @@ void WebSocketDelayTest::onMessage(network::WebSocket* ws, const network::WebSoc
     {
         _receiveTextTimes++;
         char times[100] = {0};
-        sprintf(times, "%d", _receiveTextTimes);
+        snprintf(times, sizeof(times), "%d", _receiveTextTimes);
         std::string textStr = std::string("response text msg: ")+data.bytes+", "+times;
         log("%s", textStr.c_str());
         doReceiveText();
@@ -184,7 +184,7 @@ void WebSocketDelayTest::onError(network::WebSocket* ws, const network::WebSocke
 {
     log("Error was fired, error code: %d", static_cast<int>(error));
     char buf[100] = {0};
-    sprintf(buf, "An error was fired, code: %d", static_cast<int>(error));
+    snprintf(buf, sizeof(buf), "An error was fired, code: %d", static_cast<int>(error));
 
     if (ws == _wsiSendText)
     {

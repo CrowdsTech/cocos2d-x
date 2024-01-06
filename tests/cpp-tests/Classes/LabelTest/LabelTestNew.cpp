@@ -186,7 +186,7 @@ void LabelFNTColorAndOpacity::step(float dt)
 {
     _time += dt;
     char string[15] = {0};
-    sprintf(string, "%2.2f Test j", _time);
+    snprintf(string, sizeof(string), "%2.2f Test j", _time);
     
     auto label1 = (Label*) getChildByTag(kTagBitmapAtlas1);
     label1->setString(string);
@@ -268,7 +268,7 @@ void LabelFNTSpriteActions::step(float dt)
 {
     _time += dt;
     char string[10] = {0};
-    sprintf(string, "%04.1f", _time);
+    snprintf(string, sizeof(string), "%04.1f", _time);
     auto label1 = (Label*) getChildByTag(kTagBitmapAtlas2);
     label1->setString(string);
 }
@@ -393,7 +393,7 @@ LabelFNTHundredLabels::LabelFNTHundredLabels()
     for ( int i=0 ; i < 100;i ++ ) 
     {
         char str[6] = {0};
-        sprintf(str, "-%d-", i);
+        snprintf(str, sizeof(str), "-%d-", i);
         auto label = Label::createWithBMFont("fonts/bitmapFontTest.fnt", str);
         addChild(label);
         
@@ -1487,13 +1487,13 @@ void LabelCharMapTest::step(float dt)
 {
     _time += dt;
     char string[12] = {0};
-    sprintf(string, "%2.2f Test", _time);
+    snprintf(string, sizeof(string), "%2.2f Test", _time);
 
     auto label1 = (Label*)getChildByTag(kTagSprite1);
     label1->setString(string);
 
     auto label2 = (Label*)getChildByTag(kTagSprite2);
-    sprintf(string, "%d", (int)_time);
+    snprintf(string, sizeof(string), "%d", (int)_time);
     label2->setString(string);
 }
 
@@ -1547,12 +1547,12 @@ void LabelCharMapColorTest::step(float dt)
 {
     _time += dt;
     char string[12] = {0};
-    sprintf(string, "%2.2f Test", _time);
+    snprintf(string, sizeof(string), "%2.2f Test", _time);
     auto label1 = (Label*)getChildByTag(kTagSprite1);
     label1->setString(string);
 
     auto label2 = (Label*)getChildByTag(kTagSprite2);
-    sprintf(string, "%d", (int)_time);
+    snprintf(string, sizeof(string), "%d", (int)_time);
     label2->setString( string );    
 }
 

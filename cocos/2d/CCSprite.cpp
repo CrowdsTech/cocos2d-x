@@ -125,7 +125,7 @@ Sprite* Sprite::createWithSpriteFrameName(const std::string& spriteFrameName)
 
 #if COCOS2D_DEBUG > 0
     char msg[256] = {0};
-    sprintf(msg, "Invalid spriteFrameName: %s", spriteFrameName.c_str());
+    snprintf(msg, sizeof(msg), "Invalid spriteFrameName: %s", spriteFrameName.c_str());
     CCASSERT(frame != nullptr, msg);
 #endif
 
@@ -1730,9 +1730,9 @@ std::string Sprite::getDescription() const
 {
     char textureDescriptor[100];
     if (_renderMode == RenderMode::QUAD_BATCHNODE)
-        sprintf(textureDescriptor, "<Sprite | Tag = %d, TextureID = %p>", _tag, _batchNode->getTextureAtlas()->getTexture()->getBackendTexture());
+        snprintf(textureDescriptor, sizeof(textureDescriptor), "<Sprite | Tag = %d, TextureID = %p>", _tag, _batchNode->getTextureAtlas()->getTexture()->getBackendTexture());
     else
-        sprintf(textureDescriptor, "<Sprite | Tag = %d, TextureID = %p>", _tag, _texture->getBackendTexture());
+        snprintf(textureDescriptor, sizeof(textureDescriptor), "<Sprite | Tag = %d, TextureID = %p>", _tag, _texture->getBackendTexture());
     
     return textureDescriptor;
 }

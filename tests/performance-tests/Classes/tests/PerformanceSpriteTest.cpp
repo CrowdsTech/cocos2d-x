@@ -227,7 +227,7 @@ Sprite* SubTest::createSpriteWithTag(int tag)
         {
             int idx = (CCRANDOM_0_1() * 1400 / 100) + 1;
             char str[32] = {0};
-            sprintf(str, "Images/grossini_dance_%02d.png", idx);
+            snprintf(str, sizeof(str), "Images/grossini_dance_%02d.png", idx);
             sprite = Sprite::create(str);
             _parentNode->addChild(sprite, 0, tag+100);
             break;
@@ -260,7 +260,7 @@ Sprite* SubTest::createSpriteWithTag(int tag)
                 x = r % 8;
 
                 char str[40] = {0};
-                sprintf(str, "Images/sprites_test/sprite-%d-%d.png", x, y);
+                snprintf(str, sizeof(str), "Images/sprites_test/sprite-%d-%d.png", x, y);
                 sprite = Sprite::create(str);
                 _parentNode->addChild(sprite, 0, tag+100);
                 break;
@@ -420,7 +420,7 @@ void SpriteMainScene::initWithSubTest(int asubtest, int nNodes)
     for (int i = 1; i <= MAX_SUB_TEST_NUM; ++i)
     {
         char str[10] = {0};
-        sprintf(str, "%d ", i);
+        snprintf(str, sizeof(str), "%d ", i);
         auto itemFont = MenuItemFont::create(str, CC_CALLBACK_1(SpriteMainScene::testNCallback, this));
         itemFont->setTag(i);
         subMenu->addChild(itemFont, 10);
@@ -496,7 +496,7 @@ void SpriteMainScene::updateNodes()
     {
         auto infoLabel = (Label *) getChildByTag(kTagInfoLayer);
         char str[16] = {0};
-        sprintf(str, "%u nodes", _quantityNodes);
+        snprintf(str, sizeof(str), "%u nodes", _quantityNodes);
         infoLabel->setString(str);
 
         _lastRenderedCount = _quantityNodes;
@@ -737,7 +737,7 @@ void performanceScale(Sprite* sprite)
 std::string SpritePerformTestA::title() const
 {
     char str[32] = {0};
-    sprintf(str, "A (%d) position", _subtestNumber);
+    snprintf(str, sizeof(str), "A (%d) position", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }
@@ -755,7 +755,7 @@ void SpritePerformTestA::doTest(Sprite* sprite)
 std::string SpritePerformTestB::title() const
 {
     char str[32] = {0};
-    sprintf(str, "B (%d) scale", _subtestNumber);
+    snprintf(str, sizeof(str), "B (%d) scale", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }
@@ -773,7 +773,7 @@ void SpritePerformTestB::doTest(Sprite* sprite)
 std::string SpritePerformTestC::title() const
 {
     char str[32] = {0};
-    sprintf(str, "C (%d) scale + rot", _subtestNumber);
+    snprintf(str, sizeof(str), "C (%d) scale + rot", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }
@@ -791,7 +791,7 @@ void SpritePerformTestC::doTest(Sprite* sprite)
 std::string SpritePerformTestD::title() const
 {
     char str[32] = {0};
-    sprintf(str, "D (%d) 100%% out", _subtestNumber);
+    snprintf(str, sizeof(str), "D (%d) 100%% out", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }
@@ -809,7 +809,7 @@ void SpritePerformTestD::doTest(Sprite* sprite)
 std::string SpritePerformTestE::title() const
 {
     char str[32] = {0};
-    sprintf(str, "E (%d) 80%% out", _subtestNumber);
+    snprintf(str, sizeof(str), "E (%d) 80%% out", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }
@@ -827,7 +827,7 @@ void SpritePerformTestE::doTest(Sprite* sprite)
 std::string SpritePerformTestF::title() const
 {
     char str[32] = {0};
-    sprintf(str, "F (%d) actions", _subtestNumber);
+    snprintf(str, sizeof(str), "F (%d) actions", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }
@@ -845,7 +845,7 @@ void SpritePerformTestF::doTest(Sprite* sprite)
 std::string SpritePerformTestG::title() const
 {
     char str[32] = {0};
-    sprintf(str, "G (%d) actions 80%% out", _subtestNumber);
+    snprintf(str, sizeof(str), "G (%d) actions 80%% out", _subtestNumber);
     std::string strRet = str;
     return strRet;
 }

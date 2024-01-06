@@ -223,7 +223,7 @@ struct DownloaderTest : public TestCase
             float percent = float(totalBytesReceived * 100) / totalBytesExpected;
             bar->setPercent(percent);
             char buf[32];
-            sprintf(buf, "%.1f%%[total %d KB]", percent, int(totalBytesExpected/1024));
+            snprintf(buf, sizeof(buf), "%.1f%%[total %d KB]", percent, int(totalBytesExpected/1024));
             auto status = (Label*)view->getChildByTag(TAG_STATUS);
             status->setString(buf);
         };
@@ -275,7 +275,7 @@ struct DownloaderTest : public TestCase
                 {
                     // download big file success
                     char buf[32];
-                    sprintf(buf, "Download [%s] success.", task.identifier.c_str());
+                    snprintf(buf, sizeof(buf), "Download [%s] success.", task.identifier.c_str());
                     auto status = (Label*)view->getChildByTag(TAG_STATUS);
                     status->setString(buf);
                     break;
@@ -344,8 +344,8 @@ struct DownloaderMultiTask : public TestCase
         char name[64];
         // add 64 download task at same time.
         for(int i=0; i< 64;i++){
-            sprintf(name, "%d_%s", i, sNameList[0]);
-            sprintf(path, "%sCppTests/DownloaderTest/%s", FileUtils::getInstance()->getWritablePath().c_str(), name);
+            snprintf(name, sizeof(name), "%d_%s", i, sNameList[0]);
+            snprintf(path, sizeof(path), "%sCppTests/DownloaderTest/%s", FileUtils::getInstance()->getWritablePath().c_str(), name);
             log("downloader task create: %s", name);
             this->downloader->createDownloadFileTask(sURLList[0], path, name);
         }

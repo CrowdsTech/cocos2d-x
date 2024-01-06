@@ -102,7 +102,7 @@ bool UITabControlTest::init()
         {
             displayText->retain();
             char display[20];
-            sprintf(display, "tab %d selected", index);
+            snprintf(display, sizeof(display), "tab %d selected", index);
             displayText->setString(display);
             displayText->release();
         }

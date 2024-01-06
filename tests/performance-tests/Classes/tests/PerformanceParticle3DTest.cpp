@@ -209,7 +209,7 @@ void Particle3DMainScene::step(float dt)
             }
             
             char str[128];
-            sprintf(str, "Particle Count: %d", count);
+            snprintf(str, sizeof(str), "Particle Count: %d", count);
             _particleLab->setString(str);
         }
     }
@@ -243,7 +243,7 @@ void Particle3DMainScene::updateQuantityLabel()
     {
         auto infoLabel = (Label *) getChildByTag(kTagInfoLayer);
         char str[64] = {0};
-        sprintf(str, "%u Particle Systems", _quantityParticles);
+        snprintf(str, sizeof(str), "%u Particle Systems", _quantityParticles);
         infoLabel->setString(str);
 
         _lastRenderedCount = _quantityParticles;

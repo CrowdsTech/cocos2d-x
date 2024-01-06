@@ -1421,22 +1421,22 @@ void PhysicsContactTest::resetTest()
     std::string strNum;
     char buffer[10];
     
-    sprintf(buffer, "%d", _yellowBoxNum);
+    snprintf(buffer, sizeof(buffer), "%d", _yellowBoxNum);
     auto label = Label::createWithTTF(buffer, "fonts/arial.ttf", 32);
     root->addChild(label, 1);
     label->setPosition(Vec2(s.width / 2, prevMenuPos));
     
-    sprintf(buffer, "%d", _blueBoxNum);
+    snprintf(buffer, sizeof(buffer), "%d", _blueBoxNum);
     label = Label::createWithTTF(buffer, "fonts/arial.ttf", 32);
     root->addChild(label, 1);
     label->setPosition(Vec2(s.width / 2, prevMenuPos-=menuStep));
     
-    sprintf(buffer, "%d", _yellowTriangleNum);
+    snprintf(buffer, sizeof(buffer), "%d", _yellowTriangleNum);
     label = Label::createWithTTF(buffer, "fonts/arial.ttf", 32);
     root->addChild(label, 1);
     label->setPosition(Vec2(s.width / 2, prevMenuPos-=menuStep));
     
-    sprintf(buffer, "%d", _blueTriangleNum);
+    snprintf(buffer, sizeof(buffer), "%d", _blueTriangleNum);
     label = Label::createWithTTF(buffer, "fonts/arial.ttf", 32);
     root->addChild(label, 1);
     label->setPosition(Vec2(s.width / 2, prevMenuPos-=menuStep));

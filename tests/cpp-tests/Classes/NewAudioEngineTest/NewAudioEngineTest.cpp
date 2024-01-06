@@ -451,7 +451,7 @@ bool PlaySimultaneouslyTest::init()
     char text[36];
     int tmp = 81;
     for(int index = 0; index < TEST_COUNT; ++index){
-        sprintf(text,"audio/SoundEffectsFX009/FX0%d.mp3",tmp + index);
+        snprintf(text, sizeof(text),"audio/SoundEffectsFX009/FX0%d.mp3",tmp + index);
         _files[index] = text;
     }
     _playingcount = 0;
@@ -518,7 +518,7 @@ bool AudioProfileTest::init()
     
     Vec2 pos(0.5f,0.7f);
     for(int index = 0; index < FILE_COUNT; ++index){
-        sprintf(text,"play %s",_files[index].c_str());
+        snprintf(text, sizeof(text),"play %s",_files[index].c_str());
         
         auto playItem = TextButton::create(text, [&](TextButton* button){
             int index = button->getTag();
@@ -527,13 +527,13 @@ bool AudioProfileTest::init()
                 _time = _minDelay;
                 _audioCount += 1;
                 char show[30];
-                sprintf(show,"audio count:%d",_audioCount);
+                snprintf(show, sizeof(show),"audio count:%d",_audioCount);
                 _showLabel->setString(show);
                 
                 AudioEngine::setFinishCallback(id, [&](int id, const std::string& filePath){
                     _audioCount -= 1;
                     char show[30];
-                    sprintf(show,"audio count:%d",_audioCount);
+                    snprintf(show, sizeof(show),"audio count:%d",_audioCount);
                     _showLabel->setString(show);
                 });
             }
@@ -688,7 +688,7 @@ bool AudioIssue18597Test::init()
         this->schedule([=](float dt){
             _time += dt;
             char timeString[20] = {0};
-            sprintf(timeString, "Time %2.2f", _time);
+            snprintf(timeString, sizeof(timeString), "Time %2.2f", _time);
             dynamic_cast<Label *>(this->getChildByTag(999))->setString(timeString);
         }, 0.05, 1000000, 0, "update label quickly");
 
@@ -720,7 +720,7 @@ bool AudioIssue11143Test::init()
             
             auto audioId = AudioEngine::play2d("audio/SoundEffectsFX009/FX082.mp3", true);
             char key[100] = {0};
-            sprintf(key, "play another sound %d", audioId);
+            snprintf(key, sizeof(key), "play another sound %d", audioId);
             button->scheduleOnce([audioId](float dt){
                 AudioEngine::stop(audioId);
                 AudioEngine::play2d("audio/SoundEffectsFX009/FX083.mp3");

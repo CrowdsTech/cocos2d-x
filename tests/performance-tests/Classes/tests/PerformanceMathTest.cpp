@@ -126,7 +126,7 @@ void PerformanceMathLayer::updateLoopLabel()
 {
     auto infoLabel = (Label *) getChildByTag(K_INFO_LOOP_TAG);
     char str[16] = {0};
-    sprintf(str, "%u", _loopCount);
+    snprintf(str, sizeof(str), "%u", _loopCount);
     infoLabel->setString(str);
     
 }

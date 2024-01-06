@@ -77,7 +77,7 @@ void TextureCacheTest::loadingCallBack(cocos2d::Texture2D *texture)
 {
     ++_numberOfLoadedSprites;
     char tmp[10];
-    sprintf(tmp,"%%%d", (int)(((float)_numberOfLoadedSprites / _numberOfSprites) * 100));
+    snprintf(tmp, sizeof(tmp),"%%%d", (int)(((float)_numberOfLoadedSprites / _numberOfSprites) * 100));
     _labelPercent->setString(tmp);
 
     if (_numberOfLoadedSprites == _numberOfSprites)

@@ -170,7 +170,7 @@ void WebSocketTest::startTestCallback(Ref* sender)
 void WebSocketTest::onOpen(network::WebSocket* ws)
 {
     char status[256] = {0};
-    sprintf(status, "Opened, url: %s, protocol: %s", ws->getUrl().c_str(), ws->getProtocol().c_str());
+    snprintf(status, sizeof(status), "Opened, url: %s, protocol: %s", ws->getUrl().c_str(), ws->getProtocol().c_str());
 
     log("Websocket (%p) was opened, url: %s, protocol: %s", ws, ws->getUrl().c_str(), ws->getProtocol().c_str());
     if (ws == _wsiSendText)
@@ -193,7 +193,7 @@ void WebSocketTest::onMessage(network::WebSocket* ws, const network::WebSocket::
     {
         _sendTextTimes++;
         char times[100] = {0};
-        sprintf(times, "%d", _sendTextTimes);
+        snprintf(times, sizeof(times), "%d", _sendTextTimes);
         std::string textStr = std::string("response text msg: ")+data.bytes+", "+times;
         log("%s", textStr.c_str());
         
@@ -203,7 +203,7 @@ void WebSocketTest::onMessage(network::WebSocket* ws, const network::WebSocket::
     {
         _sendBinaryTimes++;
         char times[100] = {0};
-        sprintf(times, "%d", _sendBinaryTimes);
+        snprintf(times, sizeof(times), "%d", _sendBinaryTimes);
 
         std::string binaryStr = "response bin msg: ";
         
@@ -252,7 +252,7 @@ void WebSocketTest::onError(network::WebSocket* ws, const network::WebSocket::Er
 {
     log("Error was fired, error code: %d", static_cast<int>(error));
     char buf[100] = {0};
-    sprintf(buf, "An error was fired, code: %d", static_cast<int>(error));
+    snprintf(buf, sizeof(buf), "An error was fired, code: %d", static_cast<int>(error));
 
     if (ws == _wsiSendText)
     {

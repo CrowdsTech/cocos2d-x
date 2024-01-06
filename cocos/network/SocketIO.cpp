@@ -465,7 +465,7 @@ void SIOClientImpl::handshakeResponse(HttpClient* /*sender*/, HttpResponse *resp
 
     long statusCode = response->getResponseCode();
     char statusString[64] = {};
-    sprintf(statusString, "HTTP Status Code: %ld, tag = %s", statusCode, response->getHttpRequest()->getTag());
+    snprintf(statusString, sizeof(statusString), "HTTP Status Code: %ld, tag = %s", statusCode, response->getHttpRequest()->getTag());
     CCLOGINFO("response code: %ld", statusCode);
 
     if (!response->isSucceed())

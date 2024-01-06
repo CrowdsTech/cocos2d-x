@@ -236,7 +236,7 @@ bool Bundle3D::loadObj(MeshDatas& meshdatas, MaterialDatas& materialdatas, NodeD
             tex.wrapS = backend::SamplerAddressMode::CLAMP_TO_EDGE;
             tex.wrapT = backend::SamplerAddressMode::CLAMP_TO_EDGE;
             
-            sprintf(str, "%d", ++i);
+            snprintf(str, sizeof(str), "%d", ++i);
             materialdata.textures.push_back(tex);
             materialdata.id = str;
             material.name = str;
@@ -308,7 +308,7 @@ bool Bundle3D::loadObj(MeshDatas& meshdatas, MaterialDatas& materialdatas, NodeD
             for (auto& submesh : subMeshMap) {
                 meshdata->subMeshIndices.push_back(submesh.second);
                 meshdata->subMeshAABB.push_back(calculateAABB(meshdata->vertex, meshdata->getPerVertexSize(), submesh.second));
-                sprintf(str, "%d", ++i);
+                snprintf(str, sizeof(str), "%d", ++i);
                 meshdata->subMeshIds.push_back(str);
                 
                 auto modelnode = new (std::nothrow) ModelData();
@@ -1103,7 +1103,7 @@ bool Bundle3D::loadBinary(const std::string& path)
     }
     
     char version[20] = {0};
-    sprintf(version, "%d.%d", ver[0], ver[1]);
+    snprintf(version, sizeof(version), "%d.%d", ver[0], ver[1]);
     _version = version;
     
     // Read ref table size

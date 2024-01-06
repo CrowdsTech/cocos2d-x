@@ -401,7 +401,7 @@ void CustomEventTest::onEnter()
         static int count = 0;
         ++count;
         char* buf = new char[10];
-        sprintf(buf, "%d", count);
+        snprintf(buf, sizeof(buf), "%d", count);
         EventCustom event("game_custom_event1");
         event.setUserData(buf);
         _eventDispatcher->dispatchEvent(&event);
@@ -427,7 +427,7 @@ void CustomEventTest::onEnter()
         static int count = 0;
         ++count;
         char* buf = new char[10];
-        sprintf(buf, "%d", count);
+        snprintf(buf, sizeof(buf), "%d", count);
         EventCustom event("game_custom_event2");
         event.setUserData(buf);
         _eventDispatcher->dispatchEvent(&event);
@@ -473,14 +473,14 @@ void LabelKeyboardEventTest::onEnter()
     auto listener = EventListenerKeyboard::create();
     listener->onKeyPressed = [](EventKeyboard::KeyCode keyCode, Event* event){
         char buf[100] = {0};
-        sprintf(buf, "Key %d was pressed!", (int)keyCode);
+        snprintf(buf, sizeof(buf), "Key %d was pressed!", (int)keyCode);
         auto label = static_cast<Label*>(event->getCurrentTarget());
         label->setString(buf);
     };
     
     listener->onKeyReleased = [](EventKeyboard::KeyCode keyCode, Event* event){
         char buf[100] = {0};
-        sprintf(buf, "Key %d was released!", (int)keyCode);
+        snprintf(buf, sizeof(buf), "Key %d was released!", (int)keyCode);
         auto label = static_cast<Label*>(event->getCurrentTarget());
         label->setString(buf);
     };

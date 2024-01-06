@@ -98,7 +98,7 @@ void RenderTextureSave::saveImageWithPremultipliedAlpha(cocos2d::Ref* sender)
     static int counter = 0;
 
     char png[20];
-    sprintf(png, "image-pma-%d.png", counter);
+    snprintf(png, sizeof(png), "image-pma-%d.png", counter);
 
     auto callback = [&](RenderTexture* rt, const std::string& path)
     {
@@ -124,7 +124,7 @@ void RenderTextureSave::saveImageWithNonPremultipliedAlpha(cocos2d::Ref *sender)
     static int counter = 0;
 
     char png[20];
-    sprintf(png, "image-no-pma-%d.png", counter);
+    snprintf(png, sizeof(png), "image-no-pma-%d.png", counter);
     
     auto callback = [&](RenderTexture* rt, const std::string& path)
     {

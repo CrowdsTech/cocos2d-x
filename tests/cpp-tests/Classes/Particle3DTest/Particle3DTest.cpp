@@ -133,7 +133,7 @@ void Particle3DTestDemo::update( float delta )
         }
 
         char str[128];
-        sprintf(str, "Particle Count: %d", count);
+        snprintf(str, sizeof(str), "Particle Count: %d", count);
         _particleLab->setString(str);
     }
 }

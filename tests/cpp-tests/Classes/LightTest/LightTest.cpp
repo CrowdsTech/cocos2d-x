@@ -264,7 +264,7 @@ void LightTest::SwitchLight( Ref* sender, LightType lightType )
         {
             char str[32];
             bool isON = !_ambientLight->isEnabled();
-            sprintf(str, "Ambient Light %s", isON == true? "ON":"OFF");
+            snprintf(str, sizeof(str), "Ambient Light %s", isON == true? "ON":"OFF");
             _ambientLight->setEnabled(isON);
             _ambientLightLabel->setString(str);
         }
@@ -274,7 +274,7 @@ void LightTest::SwitchLight( Ref* sender, LightType lightType )
         {
             char str[32];
             bool isON = !_directionalLight->isEnabled();
-            sprintf(str, "Directional Light %s", isON == true? "ON":"OFF");
+            snprintf(str, sizeof(str), "Directional Light %s", isON == true? "ON":"OFF");
             _directionalLight->setEnabled(isON);
             _directionalLightLabel->setString(str);
         }
@@ -284,7 +284,7 @@ void LightTest::SwitchLight( Ref* sender, LightType lightType )
         {
             char str[32];
             bool isON = !_pointLight->isEnabled();
-            sprintf(str, "Point Light %s", isON == true? "ON":"OFF");
+            snprintf(str, sizeof(str), "Point Light %s", isON == true? "ON":"OFF");
             _pointLight->setEnabled(isON);
             _pointLightLabel->setString(str);
         }
@@ -294,7 +294,7 @@ void LightTest::SwitchLight( Ref* sender, LightType lightType )
         {
             char str[32];
             bool isON = !_spotLight->isEnabled();
-            sprintf(str, "Spot Light %s", isON == true? "ON":"OFF");
+            snprintf(str, sizeof(str), "Spot Light %s", isON == true? "ON":"OFF");
             _spotLight->setEnabled(isON);
             _spotLightLabel->setString(str);
         }

@@ -375,7 +375,7 @@ void HttpClientTest::onHttpRequestCompleted(HttpClient *sender, HttpResponse *re
     
     long statusCode = response->getResponseCode();
     char statusString[64] = {};
-    sprintf(statusString, "HTTP Status Code: %ld, tag = %s", statusCode, response->getHttpRequest()->getTag());
+    snprintf(statusString, sizeof(statusString), "HTTP Status Code: %ld, tag = %s", statusCode, response->getHttpRequest()->getTag());
     _labelStatusCode->setString(statusString);
     log("response code: %ld", statusCode);
     
@@ -531,12 +531,12 @@ void HttpClientClearRequestsTest::onHttpRequestCompleted(HttpClient *sender, Htt
     
     long statusCode = response->getResponseCode();
     char statusString[64] = {};
-    sprintf(statusString, "HTTP Status Code: %ld, tag = %s", statusCode, response->getHttpRequest()->getTag());
+    snprintf(statusString, sizeof(statusString), "HTTP Status Code: %ld, tag = %s", statusCode, response->getHttpRequest()->getTag());
     _labelStatusCode->setString(statusString);
     log("response code: %ld", statusCode);
     
     _totalProcessedRequests++;
-    sprintf(statusString, "Got %d of %d expected http requests", _totalProcessedRequests, _totalExpectedRequests);
+    snprintf(statusString, sizeof(statusString), "Got %d of %d expected http requests", _totalProcessedRequests, _totalExpectedRequests);
     _labelTrakingData->setString(statusString);
     
     if (!response->isSucceed())

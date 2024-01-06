@@ -32,7 +32,7 @@ using namespace cocostudio;
 void sendEvent(unsigned int event)
 {
     char buf[10];
-    sprintf(buf, "%d", event);
+    snprintf(buf, sizeof(buf), "%d", event);
     std::string custom_event_name(buf);
 
     EventCustom eventCustom(custom_event_name);

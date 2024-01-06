@@ -178,7 +178,7 @@ void AssetsManager::checkStoragePath()
 static std::string keyWithHash( const char* prefix, const std::string& url )
 {
     char buf[256];
-    sprintf(buf,"%s%zd",prefix,std::hash<std::string>()(url));
+    snprintf(buf, sizeof(buf),"%s%zd",prefix,std::hash<std::string>()(url));
     return buf;
 }
 
