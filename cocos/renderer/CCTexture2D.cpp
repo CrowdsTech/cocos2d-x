@@ -151,7 +151,7 @@ Texture2D::~Texture2D()
 #endif
     CC_SAFE_RELEASE_NULL(_alphaTexture); // ETC1 ALPHA support.
 
-    CCLOGINFO("deallocing Texture2D: %p - id=%u", this, _name);
+    CCLOGINFO("deallocing Texture2D: %p - id=%u", this, /*_name*/0);
 
     CC_SAFE_DELETE(_ninePatchInfo);
 

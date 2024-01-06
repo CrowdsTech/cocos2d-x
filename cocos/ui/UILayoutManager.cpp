@@ -59,6 +59,7 @@ void LinearHorizontalLayoutManager::doLayout(LayoutProtocol* layout)
                 LinearLayoutParameter::LinearGravity childGravity = layoutParameter->getGravity();
                 Vec2 ap = child->getAnchorPoint();
                 Size cs = child->getBoundingBox().size;
+                Margin mg = layoutParameter->getMargin();
                 float finalPosX = leftBoundary + (ap.x * cs.width);
                 float finalPosY = layoutSize.height - (1.0f - ap.y) * cs.height;
                 switch (childGravity)
@@ -67,15 +68,14 @@ void LinearHorizontalLayoutManager::doLayout(LayoutProtocol* layout)
                     case LinearLayoutParameter::LinearGravity::TOP:
                         break;
                     case LinearLayoutParameter::LinearGravity::BOTTOM:
-                        finalPosY = ap.y * cs.height;
+                        finalPosY = ap.y * cs.height + mg.top; // Add top margin to counter having it subtracted below from finalPosY
                         break;
                     case LinearLayoutParameter::LinearGravity::CENTER_VERTICAL:
-                        finalPosY = layoutSize.height / 2.0f - cs.height * (0.5f - ap.y);
+                        finalPosY = layoutSize.height / 2.0f - cs.height * (0.5f - ap.y) + mg.top; // Add top margin to counter having it subtracted below from finalPosY
                         break;
                     default:
                         break;
                 }
-                Margin mg = layoutParameter->getMargin();
                 finalPosX += mg.left;
                 finalPosY -= mg.top;
                 child->setPosition(Vec2(finalPosX, finalPosY));
@@ -117,6 +117,7 @@ void LinearVerticalLayoutManager::doLayout(LayoutProtocol* layout)
                 LinearLayoutParameter::LinearGravity childGravity = layoutParameter->getGravity();
                 Vec2 ap = subWidget->getAnchorPoint();
                 Size cs = subWidget->getBoundingBox().size;
+                Margin mg = layoutParameter->getMargin();
                 float finalPosX = ap.x * cs.width;
                 float finalPosY = topBoundary - ((1.0f-ap.y) * cs.height);
                 switch (childGravity)
@@ -125,15 +126,14 @@ void LinearVerticalLayoutManager::doLayout(LayoutProtocol* layout)
                     case LinearLayoutParameter::LinearGravity::LEFT:
                         break;
                     case LinearLayoutParameter::LinearGravity::RIGHT:
-                        finalPosX = layoutSize.width - ((1.0f - ap.x) * cs.width);
+                        finalPosX = layoutSize.width - ((1.0f - ap.x) * cs.width) - mg.left; // Subtract left margin to counter having it added below to finalPosX
                         break;
                     case LinearLayoutParameter::LinearGravity::CENTER_HORIZONTAL:
-                        finalPosX = layoutSize.width / 2.0f - cs.width * (0.5f-ap.x);
+                        finalPosX = layoutSize.width / 2.0f - cs.width * (0.5f-ap.x) - mg.left; // Subtract left margin to counter having it added below to finalPosX
                         break;
                     default:
                         break;
                 }
-                Margin mg = layoutParameter->getMargin();
                 finalPosX += mg.left;
                 finalPosY -= mg.top;
                 subWidget->setPosition(finalPosX, finalPosY);

@@ -468,7 +468,7 @@ public class Cocos2dxHelper {
             Map allValues = settings.getAll();
             Object value = allValues.get(key);
             if ( value instanceof String) {
-                return  Integer.parseInt(value.toString());
+                try { return Integer.parseInt(value.toString()); } catch (Exception e) { return 0; }
             }
             else if (value instanceof Float)
             {
@@ -496,7 +496,7 @@ public class Cocos2dxHelper {
             Map allValues = settings.getAll();
             Object value = allValues.get(key);
             if ( value instanceof String) {
-                return  Float.parseFloat(value.toString());
+                try { return Float.parseFloat(value.toString()); } catch (Exception e) { return 0.0f; }
             }
             else if (value instanceof Integer)
             {
