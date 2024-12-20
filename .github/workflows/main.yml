@@ -15,6 +15,7 @@ jobs:
   ubuntu-18_04:
     runs-on: ubuntu-18.04
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -26,6 +27,7 @@ jobs:
   ubuntu-20_04:
     runs-on: ubuntu-20.04
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -37,6 +39,7 @@ jobs:
   windows-2019:
     runs-on: windows-2019
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -47,6 +50,7 @@ jobs:
   windows-2022:
     runs-on: windows-2022
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -57,6 +61,7 @@ jobs:
   macos-10_15:
     runs-on: macos-10.15
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -67,6 +72,7 @@ jobs:
   macos-11:
     runs-on: macos-11
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -77,6 +83,7 @@ jobs:
   macos-10_15_ios:
     runs-on: macos-10.15
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -87,6 +94,7 @@ jobs:
   macos-11_ios:
     runs-on: macos-11
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -97,6 +105,7 @@ jobs:
   windows-2019-android:
     runs-on: windows-2019
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
@@ -108,6 +117,7 @@ jobs:
   ubuntu-20_04-android:
     runs-on: ubuntu-20.04
     steps:
+      - run: git config --global url.https://github.com/.insteadOf git://github.com/
       - uses: actions/checkout@v2
         with:
             submodules: recursive
