@@ -48,6 +48,7 @@ macro(cocos2dx_depend)
             find_library(IOKIT_LIBRARY IOKit)
             find_library(APPKIT_LIBRARY AppKit)
             find_library(ICONV_LIBRARY iconv)
+            find_library(SYSTEM_CONFIGURATION_LIBRARY SystemConfiguration)
             list(APPEND PLATFORM_SPECIFIC_LIBS
                  ${COCOA_LIBRARY}
                  ${OPENGL_LIBRARY}
@@ -56,6 +57,7 @@ macro(cocos2dx_depend)
                  ${COCOS_APPLE_LIBS}
                  ${APPKIT_LIBRARY}
                  ${ICONV_LIBRARY}
+                 ${SYSTEM_CONFIGURATION_LIBRARY}
                  )
         elseif(IOS)
             # Locate system libraries on iOS

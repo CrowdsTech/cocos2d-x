@@ -1498,7 +1498,7 @@ void RichText::formatText()
 namespace {
     inline bool isUTF8CharWrappable(const StringUtils::StringUTF8::CharUTF8& ch)
     {
-        return (!ch.isASCII() || !std::isalnum(ch._char[0], std::locale()));
+        return ch.isASCII() && !std::isalnum(ch._char[0], std::locale()) && ch._char[0] != '\''; // !ASCII || !alnum was too broad effectively breaking inside any non-Latin word! Apostrophe is a common word character in languages like Ukrainian and English.
     }
 
     int getPrevWordPos(const StringUtils::StringUTF8& text, int idx)
