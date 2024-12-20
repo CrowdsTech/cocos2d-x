@@ -21,7 +21,7 @@ jobs:
             submodules: recursive
       - run: |
           sudo apt-get update
-          sudo apt-get install python2
+          sudo apt-get install python2 libgl1-mesa-dev libglew-dev libglfw3 libglfw3-dev libxxf86vm-dev
           python download-deps.py --r no
           echo -e "y" | bash install-deps-linux.sh
           cmake -B b -S .
@@ -63,6 +63,7 @@ jobs:
           pyenv install 2.7.18
           pyenv global 2.7.18
           echo "${HOME}/.pyenv/shims" >> $GITHUB_PATH
+          pip install --upgrade setuptools
           python download-deps.py --r no
           cmake -B b -S . -GXcode
           cmake --build b
@@ -81,6 +82,7 @@ jobs:
           pyenv install 2.7.18
           pyenv global 2.7.18
           echo "${HOME}/.pyenv/shims" >> $GITHUB_PATH
+          pip install --upgrade setuptools
           python download-deps.py --r no
           cmake -B b -S . -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator
           cmake --build b --config Release --target cpp-tests -- -quiet -destination "platform=iOS Simulator,name=iPhone Retina (4-inch)"
@@ -91,9 +93,12 @@ jobs:
       - run: git config --global url."https://".insteadOf git://
       - uses: actions/checkout@v2
         with:
-            submodules: recursive
+          submodules: recursive
       - run: python download-deps.py --r no
-      - run: ./gradlew assembleRelease -PPROP_BUILD_TYPE=cmake --info
+      - run: |
+          export ANDROID_NDK=${ANDROID_NDK_ROOT}
+          export NDK_ROOT=${ANDROID_NDK_ROOT}
+          ./gradlew assembleRelease -PPROP_BUILD_TYPE=cmake --info
         shell: bash
         working-directory: tests/cpp-tests/proj.android
 
@@ -103,11 +108,14 @@ jobs:
       - run: git config --global url."https://".insteadOf git://
       - uses: actions/checkout@v2
         with:
-            submodules: recursive
+          submodules: recursive
       - run: |
           sudo apt-get update
           sudo apt-get install python2
           python download-deps.py --r no
+      - run: |
+          export ANDROID_NDK=${ANDROID_NDK_ROOT}
+          export NDK_ROOT=${ANDROID_NDK_ROOT}
           ./gradlew assembleRelease -PPROP_BUILD_TYPE=cmake --info
         shell: bash
         working-directory: tests/cpp-tests/proj.android
