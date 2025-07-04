@@ -131,6 +131,15 @@ public:
      */
     virtual Action* getActionByTag(int tag, const Node *target) const;
 
+    /** Returns all actions that have all (when all_flags is true) or any (when all_flags is false) of the given flags set on the target.
+     *  Passing flags=0 with all_flags=true will thus return all actions on the target.
+     * @param flags     The flag field to match the actions' flags based on bitwise AND/OR depending on all_flags value.
+     * @param target    A certain target node to get actions from.
+     * @param all_flags If true, all flags must match, otherwise any flag can match.
+     * @return          A vector of actions that match the given flags.
+     */
+    virtual Vector<Action*> getActionsByFlags(unsigned int flags, const Node* target, bool all_flags = false) const;
+
     /** Returns the numbers of actions that are running in a certain target. 
      * Composable actions are counted as 1 action. Example:
      * - If you are running 1 Sequence of 7 actions, it will return 1.
@@ -165,6 +174,14 @@ public:
      */
     virtual size_t getNumberOfRunningActionsInTargetByTag(const Node *target, int tag);
 
+    /** Returns number of running actions on target that have all (when all_flags is true) or any (when all_flags is false) of the given flags set.
+     *  Passing flags=0 with all_flags=true will thus return number of all running actions on the target.
+     * @param flags     The flag field to match the actions' flags based on bitwise AND/OR depending on all_flags value.
+     * @param target    A certain target node to get actions from.
+     * @param all_flags If true, all flags must match, otherwise any flag can match.
+     * @return          Number of running actions that match the given flags.
+     */
+    virtual size_t getNumberOfRunningActionsInTargetByFlags(unsigned int flags, const Node* target, bool all_flags = false) const;
 
     /** Pauses the target: all running actions and newly added actions will be paused.
      *

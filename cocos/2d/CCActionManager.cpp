@@ -385,6 +385,33 @@ Action* ActionManager::getActionByTag(int tag, const Node *target) const
     return nullptr;
 }
 
+/// Returns all actions that have all (when all_flags is true) or any (when all_flags is false) of the given flags set on the target.
+/// Passing flags=0 with all_flags=true will thus return all actions on the target.
+Vector<Action*> ActionManager::getActionsByFlags(unsigned int flags, const Node* target, bool all_flags) const
+{
+    CCASSERT(target != nullptr, "target can't be nullptr!");
+
+    if (target == nullptr)
+        return {};
+
+    Vector<Action*> result;
+    tHashElement* element = nullptr;
+    HASH_FIND_PTR(_targets, &target, element);
+
+    if (element && element->actions)
+    {
+        for (int i = 0, n = element->actions->num; i < n; ++i)
+        {
+            Action* action = static_cast<Action*>(element->actions->arr[i]);
+
+            if (action->getOriginalTarget() == target && (all_flags ? (action->getFlags() & flags) == flags : (action->getFlags() & flags) != 0))
+                result.pushBack(action);
+        }
+    }
+
+    return result;
+}
+
 // FIXME: Passing "const O *" instead of "const O&" because HASH_FIND_IT requires the address of a pointer
 // and, it is not possible to get the address of a reference
 ssize_t ActionManager::getNumberOfRunningActionsInTarget(const Node *target) const
@@ -422,6 +449,33 @@ size_t ActionManager::getNumberOfRunningActionsInTargetByTag(const Node *target,
     }
 
     return count;
+}
+
+/// Returns number of running actions on target that have all (when all_flags is true) or any (when all_flags is false) of the given flags set.
+/// Passing flags=0 with all_flags=true will thus return number of all running actions on the target.
+size_t ActionManager::getNumberOfRunningActionsInTargetByFlags(unsigned int flags, const Node* target, bool all_flags) const
+{
+    CCASSERT(target != nullptr, "target can't be nullptr!");
+
+    if (target == nullptr)
+        return {};
+
+    size_t result = 0;
+    tHashElement* element = nullptr;
+    HASH_FIND_PTR(_targets, &target, element);
+
+    if (element && element->actions)
+    {
+        for (int i = 0, n = element->actions->num; i < n; ++i)
+        {
+            Action* action = static_cast<Action*>(element->actions->arr[i]);
+
+            if (action->getOriginalTarget() == target && (all_flags ? (action->getFlags() & flags) == flags : (action->getFlags() & flags) != 0))
+                ++result;
+        }
+    }
+
+    return result;
 }
 
 ssize_t ActionManager::getNumberOfRunningActions() const
