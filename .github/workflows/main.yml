@@ -20,8 +20,15 @@ jobs:
         with:
             submodules: recursive
       - run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install pyenv
+          pyenv install 2.7.18
+          pyenv global 2.7.18
+          echo "$(brew --prefix)/bin" >> "$GITHUB_PATH"
+          echo "$(pyenv root)/shims" >> "$GITHUB_PATH"
+      - run: |
           sudo apt-get update
-          sudo apt-get install python2 libgl1-mesa-dev libglew-dev libglfw3 libglfw3-dev libxxf86vm-dev
+          sudo apt-get install libgl1-mesa-dev libglew-dev libglfw3 libglfw3-dev libxxf86vm-dev
           python download-deps.py --r no
           echo -e "y" | bash install-deps-linux.sh
           cmake -B b -S .
@@ -110,8 +117,13 @@ jobs:
         with:
           submodules: recursive
       - run: |
-          sudo apt-get update
-          sudo apt-get install python2
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install pyenv
+          pyenv install 2.7.18
+          pyenv global 2.7.18
+          echo "$(brew --prefix)/bin" >> "$GITHUB_PATH"
+          echo "$(pyenv root)/shims" >> "$GITHUB_PATH"
+      - run: |
           python download-deps.py --r no
       - run: |
           export ANDROID_NDK=${ANDROID_NDK_ROOT}
