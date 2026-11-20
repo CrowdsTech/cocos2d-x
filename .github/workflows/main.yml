@@ -41,6 +41,7 @@ jobs:
           sudo apt-get install libgl1-mesa-dev libglew-dev libglfw3 libglfw3-dev libxxf86vm-dev
           python2 download-deps.py --r no
           echo -e "y" | bash install-deps-linux.sh
+          sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
           cmake -B b -S .
           cmake --build b
 
@@ -52,6 +53,7 @@ jobs:
         with:
             submodules: recursive
       - run: python2 download-deps.py --r no
+      - run: sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
       - run: cmake -B b -S . -G "Visual Studio 16 2019" -A Win32
       - run: cmake --build b
 
@@ -63,6 +65,7 @@ jobs:
         with:
             submodules: recursive
       - run: python2 download-deps.py --r no
+      - run: sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
       - run: cmake -B b -S . -G "Visual Studio 17 2022" -A Win32
       - run: cmake --build b
 
@@ -91,6 +94,7 @@ jobs:
           which pyenv   && pyenv   --version || true
           pip install --upgrade setuptools
           python2 download-deps.py --r no
+          sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
           cmake -B b -S . -GXcode
           cmake --build b
 
@@ -119,6 +123,7 @@ jobs:
           which pyenv   && pyenv   --version || true
           pip install --upgrade setuptools
           python2 download-deps.py --r no
+          sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
           cmake -B b -S . -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator
           cmake --build b --config Release --target cpp-tests -- -quiet -destination "platform=iOS Simulator,name=iPhone Retina (4-inch)"
 
@@ -130,6 +135,7 @@ jobs:
         with:
           submodules: recursive
       - run: python2 download-deps.py --r no
+      - run: sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
       - run: |
           export ANDROID_NDK=${ANDROID_NDK_ROOT}
           export NDK_ROOT=${ANDROID_NDK_ROOT}
@@ -164,6 +170,7 @@ jobs:
           which pyenv   && pyenv   --version || true
       - run: |
           python2 download-deps.py --r no
+          sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
       - run: |
           export ANDROID_NDK=${ANDROID_NDK_ROOT}
           export NDK_ROOT=${ANDROID_NDK_ROOT}
