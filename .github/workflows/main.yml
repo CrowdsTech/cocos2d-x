@@ -46,11 +46,17 @@ jobs:
       - name: Build Project
         run: |
           sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
+          # Workaround for this issue: https://stackoverflow.com/questions/62334452/fast-math-cause-undefined-reference-to-pow-finite
+          echo "float   __powf_finite(float x, float y) { return powf(x, y); }"   >> tests/cpp-empty-test/proj.linux/main.cpp
+          echo "float   __expf_finite(float x)          { return expf(x); }"      >> tests/cpp-empty-test/proj.linux/main.cpp
+          echo "float   __logf_finite(float x)          { return logf(x); }"      >> tests/cpp-empty-test/proj.linux/main.cpp
+          echo "float  __acosf_finite(float x)          { return acosf(x); }"     >> tests/cpp-empty-test/proj.linux/main.cpp
+          echo "float __atan2f_finite(float y, float x) { return atan2f(y, x); }" >> tests/cpp-empty-test/proj.linux/main.cpp
           cmake -B b -S .
           cmake --build b
 
-  windows-2019:
-    runs-on: windows-2019
+  windows-latest:
+    runs-on: windows-latest
     steps:
       - run: git config --global url."https://".insteadOf git://
       - uses: actions/checkout@v2
@@ -65,17 +71,16 @@ jobs:
           "C:\Python27\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Download Dependencies
         run: |
-          where python  && python  --version || verify >nul
-          where python2 && python2 --version || verify >nul
-          where python3 && python3 --version || verify >nul
-          where pip     && pip     --version || verify >nul
-          where pip3    && pip3    --version || verify >nul
-          where pyenv   && pyenv   --version || verify >nul
+          where python  && (where python  && python  --version) || verify >nul
+          where python2 && (where python2 && python2 --version) || verify >nul
+          where python3 && (where python3 && python3 --version) || verify >nul
+          where pip     && (where pip     && pip     --version) || verify >nul
+          where pip3    && (where pip3    && pip3    --version) || verify >nul
           python2 download-deps.py --r no
       - name: Build Project
         run: |
           sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
-          cmake -B b -S . -G "Visual Studio 16 2019" -A Win32
+          cmake -B b -S . -G "Visual Studio 17 2022" -A Win32
           cmake --build b
 
   windows-2022:
@@ -94,12 +99,11 @@ jobs:
           "C:\Python27\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Download Dependencies
         run: |
-          where python  && python  --version || verify >nul
-          where python2 && python2 --version || verify >nul
-          where python3 && python3 --version || verify >nul
-          where pip     && pip     --version || verify >nul
-          where pip3    && pip3    --version || verify >nul
-          where pyenv   && pyenv   --version || verify >nul
+          where python  && (where python  && python  --version) || verify >nul
+          where python2 && (where python2 && python2 --version) || verify >nul
+          where python3 && (where python3 && python3 --version) || verify >nul
+          where pip     && (where pip     && pip     --version) || verify >nul
+          where pip3    && (where pip3    && pip3    --version) || verify >nul
           python2 download-deps.py --r no
       - name: Build Project
         run: |
@@ -175,15 +179,15 @@ jobs:
           cmake -B b -S . -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator
           cmake --build b --config Release --target cpp-tests -- -quiet -destination "platform=iOS Simulator,name=iPhone Retina (4-inch)"
 
-  windows-2019-android:
-    runs-on: windows-2019
+  windows-latest-android:
+    runs-on: windows-latest
     steps:
       - run: git config --global url."https://".insteadOf git://
       - uses: actions/checkout@v2
         with:
           submodules: recursive
       - run: python2 download-deps.py --r no
-      - run: sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
+      - run: sed -i -e "s/const SizeType length;/SizeType length;/g" ../../../external/json/document.h
       - run: |
           export ANDROID_NDK=${ANDROID_NDK_ROOT}
           export NDK_ROOT=${ANDROID_NDK_ROOT}
@@ -222,7 +226,7 @@ jobs:
           python2 download-deps.py --r no
       - name: Build Project
         run: |
-          sed -i -e "s/const SizeType length;/SizeType length;/g" external/json/document.h
+          sed -i -e "s/const SizeType length;/SizeType length;/g" ../../../external/json/document.h
           export ANDROID_NDK=${ANDROID_NDK_ROOT}
           export NDK_ROOT=${ANDROID_NDK_ROOT}
           ./gradlew assembleRelease -PPROP_BUILD_TYPE=cmake --info
